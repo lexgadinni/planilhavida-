@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planilha Financeira Pessoal — Saia do Vermelho em 90 Dias</title>
+<meta name="description" content="A planilha que vai organizar sua vida financeira de uma vez por todas. Dashboard automático, controle de cartão, metas e investimentos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,500&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0F1B3C;
+  --navy-d:#08102A;
+  --green:#1F965A;
+  --green-d:#146E45;
+  --gold:#DCAF3C;
+  --gold-l:#FFDC82;
+  --orange:#E85D2C;
+  --red:#C83C32;
+  --cream:#F5F0E4;
+  --light:#FFF8EE;
+  --white:#FFFFFF;
+  --grey:#828795;
+  --grey-l:#E4E8F0;
+  --shadow:0 10px 40px rgba(15,27,60,.08);
+  --shadow-lg:0 25px 60px rgba(15,27,60,.18);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Poppins',sans-serif;
+  color:var(--navy);
+  background:var(--white);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.serif{font-family:'Lora',serif;font-weight:700}
+
+/* === TOP BAR === */
+.topbar{
+  background:var(--green);
+  color:#fff;
+  padding:10px 0;
+  text-align:center;
+  font-weight:600;
+  font-size:14px;
+  letter-spacing:.3px;
+}
+.topbar svg{vertical-align:-3px;margin-right:6px}
+
+/* === NAV === */
+nav{
+  padding:18px 0;
+  background:#fff;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 2px 10px rgba(0,0,0,.04);
+}
+.nav-inner{display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Lora',serif;font-weight:700;font-size:22px;color:var(--navy)}
+.logo span{color:var(--green)}
+.nav-cta{
+  background:var(--orange);
+  color:#fff;
+  padding:10px 22px;
+  border-radius:50px;
+  font-weight:600;
+  font-size:14px;
+  transition:.2s;
+}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(232,93,44,.4)}
+
+/* === HERO === */
+.hero{
+  background:linear-gradient(135deg,var(--cream) 0%,#FFE9D0 100%);
+  padding:60px 0 90px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  top:-100px;
+  right:-100px;
+  width:400px;
+  height:400px;
+  background:radial-gradient(circle,rgba(220,175,60,.15) 0%,transparent 70%);
+  border-radius:50%;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  gap:60px;
+  align-items:center;
+  position:relative;
+}
+.hero-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(31,150,90,.12);
+  color:var(--green-d);
+  padding:8px 18px;
+  border-radius:50px;
+  font-weight:600;
+  font-size:14px;
+  margin-bottom:24px;
+}
+.hero-tag .dot{width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+h1.hero-title{
+  font-family:'Lora',serif;
+  font-size:64px;
+  line-height:1.05;
+  color:var(--navy);
+  margin-bottom:24px;
+  letter-spacing:-1px;
+}
+h1.hero-title .accent{color:var(--orange);font-style:italic}
+h1.hero-title .strike{color:var(--red);text-decoration:line-through;font-weight:600}
+
+.hero-sub{
+  font-size:18px;
+  color:#3A4256;
+  margin-bottom:32px;
+  max-width:520px;
+}
+.hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:28px}
+.btn-primary{
+  background:var(--orange);
+  color:#fff;
+  padding:20px 40px;
+  border-radius:60px;
+  font-weight:700;
+  font-size:18px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  border:none;
+  cursor:pointer;
+  transition:all .25s;
+  box-shadow:0 10px 25px rgba(232,93,44,.35);
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 35px rgba(232,93,44,.5)}
+.btn-primary svg{transition:transform .25s}
+.btn-primary:hover svg{transform:translateX(5px)}
+.guarantee{font-size:14px;color:#5A6275;display:flex;align-items:center;gap:6px}
+.guarantee svg{flex-shrink:0}
+
+.hero-bullets{display:flex;flex-wrap:wrap;gap:20px;color:#3A4256;font-size:15px}
+.hero-bullets span{display:inline-flex;align-items:center;gap:6px;font-weight:500}
+
+/* HERO MOCKUP */
+.mockup{
+  position:relative;
+  perspective:1000px;
+}
+.mockup-card{
+  background:#fff;
+  border-radius:20px;
+  box-shadow:var(--shadow-lg);
+  padding:24px;
+  transform:rotate(-2deg);
+  transition:transform .4s;
+}
+.mockup:hover .mockup-card{transform:rotate(0deg)}
+.mockup-header{
+  background:var(--navy);
+  color:#fff;
+  margin:-24px -24px 16px;
+  padding:14px 20px;
+  border-radius:20px 20px 0 0;
+  font-weight:700;
+  font-size:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.mockup-header span:last-child{color:var(--gold)}
+.kpi-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.kpi{padding:14px;border-radius:10px;text-align:center}
+.kpi.green{background:rgba(31,150,90,.12)}
+.kpi.red{background:rgba(200,60,50,.1)}
+.kpi.navy{background:rgba(15,27,60,.08)}
+.kpi.gold{background:rgba(220,175,60,.15)}
+.kpi-label{font-size:10px;font-weight:600;color:var(--grey);text-transform:uppercase;letter-spacing:.5px}
+.kpi-value{font-family:'Lora',serif;font-weight:700;font-size:22px;margin-top:4px}
+.kpi.green .kpi-value{color:var(--green-d)}
+.kpi.red .kpi-value{color:var(--red)}
+.kpi.navy .kpi-value{color:var(--navy)}
+.kpi.gold .kpi-value{color:#A87E1A}
+
+.mock-table{width:100%;border-collapse:collapse;font-size:12px}
+.mock-table th{background:var(--navy);color:#fff;padding:8px;font-weight:600;text-align:left}
+.mock-table td{padding:8px;border-bottom:1px solid var(--grey-l)}
+.mock-table tr:nth-child(even) td{background:var(--light)}
+.bar{height:8px;background:var(--grey-l);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px}
+
+.floating-tag{
+  position:absolute;
+  background:#fff;
+  padding:14px 20px;
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  font-weight:600;
+  font-size:14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.floating-tag.t1{top:-20px;right:-30px;animation:float 3s ease-in-out infinite}
+.floating-tag.t2{bottom:20px;left:-40px;animation:float 3.5s ease-in-out infinite reverse}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* === SECTIONS === */
+section{padding:80px 0}
+.section-tag{
+  display:inline-block;
+  background:rgba(232,93,44,.12);
+  color:var(--orange);
+  padding:6px 16px;
+  border-radius:30px;
+  font-weight:600;
+  font-size:13px;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+h2.section-title{
+  font-family:'Lora',serif;
+  font-size:48px;
+  line-height:1.1;
+  color:var(--navy);
+  margin-bottom:18px;
+  max-width:760px;
+}
+.section-sub{
+  font-size:18px;
+  color:#3A4256;
+  max-width:680px;
+  margin-bottom:50px;
+}
+.text-center{text-align:center}
+.text-center h2,.text-center .section-sub{margin-left:auto;margin-right:auto}
+
+/* === LOGOS / TRUST === */
+.trust{padding:40px 0;background:#fff;border-bottom:1px solid #F0EBE0}
+.trust-grid{display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:24px}
+.trust-item{display:flex;align-items:center;gap:10px;color:#5A6275;font-weight:600;font-size:14px}
+
+/* === BENEFICIOS === */
+.benefits{background:var(--cream)}
+.benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.benefit-card{
+  background:#fff;
+  padding:36px 28px;
+  border-radius:20px;
+  transition:.3s;
+  box-shadow:0 4px 12px rgba(15,27,60,.04);
+}
+.benefit-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.benefit-icon{
+  width:64px;
+  height:64px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:20px;
+}
+.benefit-icon.green{background:rgba(31,150,90,.15);color:var(--green)}
+.benefit-icon.orange{background:rgba(232,93,44,.15);color:var(--orange)}
+.benefit-icon.navy{background:rgba(15,27,60,.1);color:var(--navy)}
+.benefit-icon.gold{background:rgba(220,175,60,.2);color:#A87E1A}
+.benefit-icon.red{background:rgba(200,60,50,.12);color:var(--red)}
+.benefit-icon.purple{background:rgba(120,80,200,.12);color:#7850C8}
+.benefit-card h3{font-size:22px;margin-bottom:12px;color:var(--navy)}
+.benefit-card p{color:#5A6275;font-size:15px}
+
+/* === O QUE TEM === */
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-top:30px}
+.feature-list{display:flex;flex-direction:column;gap:18px}
+.feature-item{
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
+  padding:20px;
+  background:#fff;
+  border-radius:14px;
+  border-left:4px solid var(--green);
+  box-shadow:0 2px 10px rgba(15,27,60,.04);
+}
+.feature-icon{
+  width:40px;
+  height:40px;
+  border-radius:10px;
+  background:rgba(31,150,90,.15);
+  color:var(--green);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+.feature-text strong{display:block;font-size:17px;color:var(--navy);margin-bottom:2px}
+.feature-text span{color:#5A6275;font-size:14px}
+
+.preview-card{
+  background:linear-gradient(135deg,var(--navy) 0%,#1A2A5C 100%);
+  border-radius:24px;
+  padding:32px;
+  color:#fff;
+  box-shadow:var(--shadow-lg);
+}
+.preview-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.preview-tab{
+  background:rgba(255,255,255,.1);
+  padding:8px 14px;
+  border-radius:8px;
+  font-size:12px;
+  font-weight:600;
+}
+.preview-tab.active{background:var(--gold);color:var(--navy)}
+
+/* === TESTIMONIALS === */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.testi-card{
+  background:#fff;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  position:relative;
+}
+.testi-stars{color:var(--gold);font-size:18px;letter-spacing:2px;margin-bottom:14px}
+.testi-quote{color:#3A4256;margin-bottom:20px;font-style:italic;line-height:1.7}
+.testi-author{display:flex;gap:12px;align-items:center}
+.testi-avatar{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--gold) 0%,var(--orange) 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-weight:700;
+  font-size:20px;
+}
+.testi-info strong{display:block;color:var(--navy)}
+.testi-info span{color:var(--grey);font-size:13px}
+
+/* === PRICING === */
+.pricing{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-d) 100%);color:#fff;text-align:center}
+.pricing h2{color:#fff}
+.pricing .section-sub{color:rgba(255,255,255,.8)}
+.price-card{
+  background:#fff;
+  color:var(--navy);
+  border-radius:24px;
+  padding:50px 40px;
+  max-width:520px;
+  margin:0 auto;
+  box-shadow:0 30px 80px rgba(0,0,0,.4);
+  position:relative;
+  overflow:hidden;
+}
+.price-badge{
+  position:absolute;
+  top:24px;
+  right:-40px;
+  background:var(--orange);
+  color:#fff;
+  padding:6px 50px;
+  font-weight:700;
+  font-size:13px;
+  transform:rotate(40deg);
+  letter-spacing:1px;
+}
+.price-old{color:var(--grey);text-decoration:line-through;font-size:22px;margin-bottom:8px}
+.price-current{font-family:'Lora',serif;font-size:84px;font-weight:700;color:var(--green);line-height:1}
+.price-current small{font-size:36px;color:var(--green)}
+.price-installments{color:#5A6275;font-weight:500;margin:8px 0 30px}
+.price-features{
+  text-align:left;
+  margin:30px 0;
+  padding:24px 0;
+  border-top:1px dashed #E4E8F0;
+  border-bottom:1px dashed #E4E8F0;
+}
+.price-features li{
+  list-style:none;
+  padding:8px 0;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#3A4256;
+}
+.price-features svg{flex-shrink:0;color:var(--green)}
+.btn-buy{
+  width:100%;
+  background:linear-gradient(90deg,var(--orange) 0%,#FF7A4D 100%);
+  color:#fff;
+  padding:22px;
+  border-radius:60px;
+  font-weight:700;
+  font-size:20px;
+  border:none;
+  cursor:pointer;
+  transition:.25s;
+  box-shadow:0 10px 30px rgba(232,93,44,.4);
+  margin-top:10px;
+}
+.btn-buy:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(232,93,44,.55)}
+.payment-icons{display:flex;justify-content:center;gap:14px;margin-top:24px;flex-wrap:wrap}
+.payment-icon{
+  background:#F5F0E4;
+  padding:8px 14px;
+  border-radius:8px;
+  font-weight:600;
+  font-size:12px;
+  color:var(--navy);
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+/* === GUARANTEE === */
+.guarantee-section{background:var(--cream);padding:60px 0}
+.guarantee-box{
+  background:#fff;
+  border:3px dashed var(--green);
+  border-radius:20px;
+  padding:40px;
+  display:flex;
+  gap:30px;
+  align-items:center;
+  max-width:900px;
+  margin:0 auto;
+}
+.guarantee-seal{
+  width:140px;
+  height:140px;
+  background:radial-gradient(circle,var(--green) 0%,var(--green-d) 100%);
+  color:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  flex-shrink:0;
+  font-family:'Lora',serif;
+  text-align:center;
+  font-weight:700;
+  box-shadow:0 10px 30px rgba(31,150,90,.4);
+}
+.guarantee-seal .num{font-size:48px;line-height:1}
+.guarantee-seal .small{font-size:11px;letter-spacing:1px;text-transform:uppercase;font-family:'Poppins',sans-serif}
+.guarantee-text h3{font-size:26px;margin-bottom:10px;color:var(--navy)}
+.guarantee-text p{color:#3A4256}
+
+/* === FAQ === */
+.faq-list{max-width:780px;margin:40px auto 0}
+.faq-item{
+  background:#fff;
+  border-radius:14px;
+  margin-bottom:14px;
+  box-shadow:0 2px 10px rgba(15,27,60,.05);
+  overflow:hidden;
+  border:1px solid #F0EBE0;
+}
+.faq-q{
+  padding:22px 28px;
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:600;
+  color:var(--navy);
+  font-size:17px;
+  user-select:none;
+}
+.faq-icon{
+  width:30px;
+  height:30px;
+  background:var(--orange);
+  color:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  font-weight:700;
+  transition:transform .25s;
+  flex-shrink:0;
+}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-a{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .35s ease,padding .35s ease;
+  padding:0 28px;
+  color:#3A4256;
+}
+.faq-item.open .faq-a{padding:0 28px 22px;max-height:300px}
+
+/* === FINAL CTA === */
+.final-cta{
+  background:linear-gradient(135deg,var(--green) 0%,var(--green-d) 100%);
+  color:#fff;
+  text-align:center;
+  padding:90px 0;
+}
+.final-cta h2{color:#fff;margin-bottom:20px}
+.final-cta .section-sub{color:rgba(255,255,255,.9);margin-bottom:40px}
+.final-cta .btn-primary{background:var(--gold);color:var(--navy);box-shadow:0 10px 30px rgba(220,175,60,.5)}
+.final-cta .btn-primary:hover{box-shadow:0 16px 40px rgba(220,175,60,.7)}
+
+/* === FOOTER === */
+footer{background:var(--navy-d);color:#A0A8C0;padding:50px 0 30px;text-align:center;font-size:14px}
+footer .logo{color:#fff;margin-bottom:14px}
+.footer-links{display:flex;justify-content:center;gap:24px;margin:20px 0;flex-wrap:wrap}
+.footer-links a{transition:.2s}
+.footer-links a:hover{color:#fff}
+
+/* === MODAL === */
+.modal-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(8,16,42,.85);
+  backdrop-filter:blur(8px);
+  z-index:1000;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.modal-overlay.active{display:flex}
+.modal{
+  background:#fff;
+  max-width:480px;
+  width:100%;
+  border-radius:24px;
+  padding:40px;
+  position:relative;
+  text-align:center;
+  animation:slideUp .3s;
+}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-close{
+  position:absolute;
+  top:18px;
+  right:18px;
+  background:#F5F0E4;
+  border:none;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:18px;
+  color:var(--navy);
+}
+.modal h3{font-family:'Lora',serif;font-size:32px;margin-bottom:12px}
+.modal p{color:#5A6275;margin-bottom:24px}
+.modal .btn-primary{width:100%;justify-content:center}
+
+/* === RESPONSIVE === */
+@media (max-width:900px){
+  .hero-grid,.what-grid{grid-template-columns:1fr;gap:40px}
+  h1.hero-title{font-size:42px}
+  h2.section-title{font-size:32px}
+  .benefit-grid,.testi-grid{grid-template-columns:1fr}
+  .price-card{padding:36px 24px}
+  .price-current{font-size:64px}
+  .guarantee-box{flex-direction:column;text-align:center;padding:30px 20px}
+  .floating-tag.t1{right:0;top:-10px}
+  .floating-tag.t2{left:0}
+  section{padding:60px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+  ENTREGA IMEDIATA POR E-MAIL · GARANTIA DE 7 DIAS
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="container nav-inner">
+    <div class="logo">Vida<span>Financeira</span></div>
+    <a href="#comprar" class="nav-cta">QUERO ORGANIZAR MINHA VIDA</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:60px 0 90px">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-tag"><span class="dot"></span>+5.000 PESSOAS JÁ USAM</div>
+        <h1 class="hero-title">
+          Saia do <span class="strike">vermelho</span>
+          <br>e <span class="accent">organize sua vida</span> em até 90 dias.
+        </h1>
+        <p class="hero-sub">
+          A planilha que descomplica suas finanças: dashboard automático, controle de cartão, metas com prazo e calculadora de reserva. Tudo em <strong>1 arquivo</strong>, pronto pra usar no Excel ou Google Sheets.
+        </p>
+        <div class="hero-actions">
+          <a href="#comprar" class="btn-primary">
+            QUERO A MINHA AGORA
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <span class="guarantee">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Garantia de 7 dias
+          </span>
+        </div>
+        <div class="hero-bullets">
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Excel + Google Sheets</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Dashboard automático</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Suporte por e-mail</span>
+        </div>
+      </div>
+
+      <!-- MOCKUP -->
+      <div class="mockup">
+        <div class="floating-tag t1">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--green)"><polyline points="20 6 9 17 4 12" fill="none" stroke="#fff" stroke-width="3"/></svg>
+          Pago automaticamente
+        </div>
+        <div class="floating-tag t2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--orange)"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke="#fff" stroke-width="2" fill="none"/></svg>
+          R$ 1.247 economizados
+        </div>
+        <div class="mockup-card">
+          <div class="mockup-header">
+            <span>📊 Dashboard Janeiro/2026</span>
+            <span>R$ 4.785</span>
+          </div>
+          <div class="kpi-row">
+            <div class="kpi green">
+              <div class="kpi-label">Receitas</div>
+              <div class="kpi-value">R$ 4.785</div>
+            </div>
+            <div class="kpi red">
+              <div class="kpi-label">Despesas</div>
+              <div class="kpi-value">R$ 3.220</div>
+            </div>
+            <div class="kpi navy">
+              <div class="kpi-label">Saldo</div>
+              <div class="kpi-value">R$ 1.565</div>
+            </div>
+            <div class="kpi gold">
+              <div class="kpi-label">% Poupado</div>
+              <div class="kpi-value">32,7%</div>
+            </div>
+          </div>
+          <table class="mock-table">
+            <tr><th>Categoria</th><th>Gasto</th><th>%</th></tr>
+            <tr><td>Moradia</td><td>R$ 1.380</td><td><div class="bar"><div class="bar-fill" style="width:80%;background:var(--navy)"></div></div></td></tr>
+            <tr><td>Alimentação</td><td>R$ 760</td><td><div class="bar"><div class="bar-fill" style="width:50%;background:var(--orange)"></div></div></td></tr>
+            <tr><td>Transporte</td><td>R$ 380</td><td><div class="bar"><div class="bar-fill" style="width:30%;background:var(--gold)"></div></div></td></tr>
+            <tr><td>Lazer</td><td>R$ 270</td><td><div class="bar"><div class="bar-fill" style="width:20%;background:var(--green)"></div></div></td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust">
+  <div class="container trust-grid">
+    <div class="trust-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10" stroke="var(--green)"/></svg>
+      Compra 100% Segura
+    </div>
+    <div class="trust-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Entrega Imediata
+    </div>
+    <div class="trust-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+      Mercado Pago
+    </div>
+    <div class="trust-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      4.9/5 (+5.000 avaliações)
+    </div>
+  </div>
+</div>
+
+<!-- BENEFICIOS -->
+<section class="benefits text-center">
+  <div class="container">
+    <span class="section-tag">POR QUE TODO MUNDO AMA</span>
+    <h2 class="section-title">A diferença entre <em style="color:var(--green);font-style:italic">prosperar</em> e ficar no vermelho</h2>
+    <p class="section-sub">Você não precisa de outro app caro. Precisa de uma ferramenta clara, prática e que mostre PRA ONDE está indo seu dinheiro.</p>
+
+    <div class="benefit-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon green">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><polyline points="7 14 11 10 15 14 21 8"/></svg>
+        </div>
+        <h3>Dashboard Automático</h3>
+        <p>Veja receitas, despesas, saldo e % poupado num só lugar. Tudo calcula sozinho.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon orange">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <h3>Controle de Cartão</h3>
+        <p>Anote cada compra parcelada e nunca mais leve susto com a fatura.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon navy">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
+        </div>
+        <h3>Metas com Prazo</h3>
+        <p>Calcule quanto guardar por mês para realizar viagem, comprar carro ou quitar dívidas.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon gold">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Reserva de Emergência</h3>
+        <p>Calculadora automática: descobre quanto você precisa e em quanto tempo consegue.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon red">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <h3>Acompanha Investimentos</h3>
+        <p>Renda fixa, ações, FII, cripto. Veja sua carteira inteira num só lugar.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon purple">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Suporte Por E-mail</h3>
+        <p>Dúvida na planilha? Mandamos resposta em até 24h. Estamos do seu lado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE TEM -->
+<section>
+  <div class="container">
+    <div class="text-center">
+      <span class="section-tag">9 ABAS COMPLETAS</span>
+      <h2 class="section-title">Tudo o que você precisa em <em style="color:var(--orange);font-style:italic">1 arquivo só</em></h2>
+      <p class="section-sub">Nada de baixar 5 planilhas diferentes. Aqui está tudo conectado e funcionando.</p>
+    </div>
+
+    <div class="what-grid">
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 3v18h18"/><polyline points="7 14 11 10 15 14 21 8"/></svg></div>
+          <div class="feature-text"><strong>Dashboard Mensal</strong><span>4 KPIs principais + resumo por categoria + barra de metas</span></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <div class="feature-text"><strong>Receitas</strong><span>Salário, freelas, vendas, benefícios — tudo categorizado</span></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="feature-text"><strong>Despesas Fixas + Variáveis</strong><span>Aluguel, contas, mercado, lazer — separação clara</span></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+          <div class="feature-text"><strong>Cartão de Crédito</strong><span>Controle de parcelas, fatura total e limite</span></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg></div>
+          <div class="feature-text"><strong>Metas Financeiras</strong><span>Com prazo, valor alvo, progresso visual e quanto guardar/mês</span></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+          <div class="feature-text"><strong>Reserva + Investimentos</strong><span>Calculadora de reserva e acompanhamento de carteira</span></div>
+        </div>
+      </div>
+
+      <div class="preview-card">
+        <div style="margin-bottom:14px;font-size:13px;letter-spacing:1px;color:var(--gold);font-weight:600">PRÉVIA DA PLANILHA</div>
+        <h3 style="font-family:'Lora',serif;font-size:28px;margin-bottom:18px">Visão Geral · Janeiro</h3>
+        <div class="preview-tabs">
+          <span class="preview-tab active">📊 Dashboard</span>
+          <span class="preview-tab">💰 Receitas</span>
+          <span class="preview-tab">🛒 Despesas</span>
+          <span class="preview-tab">💳 Cartão</span>
+          <span class="preview-tab">🎯 Metas</span>
+        </div>
+        <div style="background:rgba(255,255,255,.08);padding:20px;border-radius:14px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:14px;font-size:14px">
+            <span>Receita Total</span><span style="color:var(--gold);font-weight:700">R$ 4.785,00</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:14px;font-size:14px">
+            <span>Despesa Total</span><span style="color:#FF8E7A;font-weight:700">R$ 3.220,00</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:14px;font-size:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.15)">
+            <span><strong>Saldo</strong></span><span style="color:#5EE5A5;font-weight:700;font-size:18px">+R$ 1.565,00</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:14px">
+            <span>% Poupado</span>
+            <span style="color:var(--gold);font-weight:700">32,7% 🎯</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background:var(--cream)">
+  <div class="container text-center">
+    <span class="section-tag">PROVA SOCIAL</span>
+    <h2 class="section-title">Histórias <em style="color:var(--green);font-style:italic">reais</em> de quem usou</h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Em 3 meses sai do cheque especial. Era R$ 2.000 negativo, hoje tenho R$ 5.000 de reserva. Mudou minha vida."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">R</div>
+          <div class="testi-info"><strong>Renato, 28</strong><span>Vendedor · São Paulo</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Sempre achei planilha complicado. Essa aqui é simples, bonita e me mostra tudo no Dashboard. Recomendo demais!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#7850C8,#E85D2C)">M</div>
+          <div class="testi-info"><strong>Mariana, 34</strong><span>Designer · Belo Horizonte</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Comprei e em 1 hora tava tudo configurado. Já consegui ver onde tô gastando demais. Vale CADA centavo."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#1F965A,#DCAF3C)">L</div>
+          <div class="testi-info"><strong>Lucas, 41</strong><span>Engenheiro · Curitiba</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="comprar">
+  <div class="container">
+    <div class="text-center">
+      <span class="section-tag" style="background:rgba(220,175,60,.2);color:var(--gold)">OFERTA DE LANÇAMENTO</span>
+      <h2 class="section-title">Por menos de uma <em style="color:var(--gold);font-style:italic">pizza por mês</em></h2>
+      <p class="section-sub">Pagamento único. Sem mensalidade. Sem pegadinha. Acesso vitalício à planilha + atualizações.</p>
+    </div>
+
+    <div class="price-card">
+      <div class="price-badge">-72% OFF</div>
+      <div class="price-old">de R$ 97,00 por</div>
+      <div class="price-current"><small>R$</small> 27<small>,00</small></div>
+      <div class="price-installments">ou 3x de R$ 9,00 sem juros no cartão</div>
+
+      <ul class="price-features">
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Planilha completa com 9 abas</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Dashboard automático com fórmulas</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Calculadora de reserva de emergência</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Aba de instruções passo a passo</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Funciona Excel + Google Sheets</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Atualizações gratuitas vitalícias</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Suporte por e-mail (24h)</li>
+      </ul>
+
+      <button class="btn-buy" onclick="comprarAgora()">
+        QUERO COMEÇAR HOJE 🚀
+      </button>
+      <div class="payment-icons">
+        <span class="payment-icon">💳 Cartão</span>
+        <span class="payment-icon">📱 PIX</span>
+        <span class="payment-icon">🧾 Boleto</span>
+        <span class="payment-icon">🛡️ Mercado Pago</span>
+      </div>
+      <p style="margin-top:18px;font-size:13px;color:var(--grey)">Acesso liberado em até 5 minutos no seu e-mail após confirmação.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTIA -->
+<section class="guarantee-section">
+  <div class="container">
+    <div class="guarantee-box">
+      <div class="guarantee-seal">
+        <span class="num">7</span>
+        <span class="small">DIAS DE<br>GARANTIA</span>
+      </div>
+      <div class="guarantee-text">
+        <h3>Risco zero pra você.</h3>
+        <p>Se em 7 dias você achar que a planilha não vale o que pagou, devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracia. É simples assim porque temos certeza que você vai amar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="container">
+    <div class="text-center">
+      <span class="section-tag">DÚVIDAS FREQUENTES</span>
+      <h2 class="section-title">Tudo que você quer saber <em style="color:var(--orange);font-style:italic">antes de comprar</em></h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Como recebo a planilha após a compra?<span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Após confirmação do pagamento (alguns segundos no PIX, instantâneo no cartão), você recebe automaticamente um e-mail com o link de download. Confira a caixa de spam caso não veja.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Funciona no Excel ou só no Google Sheets?<span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Os dois! A planilha vem em formato .xlsx, que abre direto no Excel (PC e Mac) e também no Google Sheets (basta fazer upload no Drive).</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Eu não entendo nada de planilha. Vou conseguir usar?<span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Sim! A planilha vem com uma aba de "Como Usar" com 5 passos simples. As fórmulas calculam tudo automaticamente — você só preenche os valores das suas receitas e despesas.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          O pagamento é seguro?<span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">100% seguro. O processamento é feito pelo Mercado Pago — uma das maiores e mais confiáveis processadoras de pagamento do Brasil. Aceitamos cartão (até 3x sem juros), PIX e boleto.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Posso pedir reembolso?<span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Sim! Você tem 7 dias corridos após a compra para testar. Se não gostar, basta enviar um e-mail e devolvemos 100% do valor. Sem perguntas.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Tem mensalidade ou pagamento recorrente?<span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Não! É um pagamento único de R$ 27. Você paga uma vez e usa pra sempre, com direito a todas as atualizações futuras de graça.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="container">
+    <h2 class="section-title text-center" style="margin-left:auto;margin-right:auto">Sua vida financeira <em style="font-style:italic">organizada</em> em 1 click.</h2>
+    <p class="section-sub text-center" style="margin-left:auto;margin-right:auto">Mais de 5.000 pessoas já saíram do vermelho usando essa planilha. Sua vez é agora.</p>
+    <div style="text-align:center">
+      <a href="#comprar" class="btn-primary">
+        BAIXAR POR R$ 27
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="logo">Vida<span style="color:var(--gold)">Financeira</span></div>
+    <p>A planilha que vai mudar sua vida financeira.</p>
+    <div class="footer-links">
+      <a href="#">Termos de Uso</a>
+      <a href="#">Política de Privacidade</a>
+      <a href="mailto:contato@suaempresa.com">Contato</a>
+    </div>
+    <p style="margin-top:20px;font-size:12px;opacity:.6">© 2026 VidaFinanceira. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="fecharModal()">×</button>
+    <div style="font-size:48px;margin-bottom:10px">🎉</div>
+    <h3>Você está a 1 click da virada</h3>
+    <p>Vamos te redirecionar para o pagamento seguro do Mercado Pago. Após a confirmação, sua planilha chega em até 5 minutos no seu e-mail.</p>
+    <a href="https://mpago.la/2XbJ7xK" target="_top" rel="noopener" class="btn-primary" id="confirmBuy" style="margin-bottom:12px;text-decoration:none;justify-content:center;display:inline-flex">
+      IR PARA O PAGAMENTO
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <p style="font-size:12px;color:var(--grey);margin-top:10px">🔒 Pagamento processado por Mercado Pago</p>
+  </div>
+</div>
+
+<script>
+// === FUNÇÕES DO MODAL ===
+function comprarAgora(){
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function fecharModal(){
+  document.getElementById('modal').classList.remove('active');
+  document.body.style.overflow='';
+}
+document.getElementById('modal').addEventListener('click',e=>{
+  if(e.target.id==='modal') fecharModal();
+});
+
+// Smooth scroll fix (funciona também dentro do iframe do Apps Script)
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const id = a.getAttribute('href');
+    if(id === '#') return;
+    const target = document.querySelector(id);
+    if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compra confirmada! · VidaFinanceira</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#1F965A 0%,#146E45 100%);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  color:#0F1B3C;
+}
+.card{
+  background:#fff;
+  border-radius:24px;
+  padding:50px 40px;
+  max-width:560px;
+  width:100%;
+  text-align:center;
+  box-shadow:0 30px 80px rgba(0,0,0,.3);
+  animation:slideUp .6s ease-out;
+}
+@keyframes slideUp{
+  from{transform:translateY(30px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+.confetti{font-size:80px;margin-bottom:10px;animation:bounce 2s infinite}
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+h1{
+  font-family:'Lora',serif;
+  font-size:38px;
+  margin-bottom:14px;
+  color:#0F1B3C;
+}
+h1 span{color:#1F965A}
+.lead{
+  font-size:18px;
+  color:#3A4256;
+  line-height:1.6;
+  margin-bottom:28px;
+}
+.box{
+  background:#FFF8EE;
+  padding:24px;
+  border-radius:14px;
+  border-left:4px solid #DCAF3C;
+  text-align:left;
+  margin:20px 0;
+}
+.box strong{
+  display:block;
+  color:#0F1B3C;
+  margin-bottom:8px;
+  font-size:16px;
+}
+.box p{color:#3A4256;font-size:14px;line-height:1.6}
+.steps{
+  text-align:left;
+  margin:24px 0;
+  padding:24px 0;
+  border-top:1px dashed #E4E8F0;
+  border-bottom:1px dashed #E4E8F0;
+}
+.steps h3{
+  font-size:14px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:#828795;
+  margin-bottom:14px;
+}
+.step{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  margin-bottom:14px;
+  color:#3A4256;
+  font-size:15px;
+}
+.step-num{
+  width:28px;
+  height:28px;
+  background:#1F965A;
+  color:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  font-size:14px;
+  flex-shrink:0;
+}
+.help{
+  font-size:13px;
+  color:#828795;
+  margin-top:24px;
+}
+.help a{color:#E85D2C;font-weight:600;text-decoration:none}
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:rgba(31,150,90,.12);
+  color:#146E45;
+  padding:6px 14px;
+  border-radius:30px;
+  font-size:13px;
+  font-weight:600;
+  margin-top:20px;
+}
+.badge::before{
+  content:"";
+  width:8px;
+  height:8px;
+  background:#1F965A;
+  border-radius:50%;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@media (max-width:480px){
+  .card{padding:36px 24px}
+  h1{font-size:28px}
+  .lead{font-size:16px}
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="confetti">🎉</div>
+  <h1>Compra <span>confirmada!</span></h1>
+  <p class="lead">
+    Sua planilha está sendo enviada agora pro e-mail que você cadastrou no Mercado Pago.
+  </p>
+
+  <div class="box">
+    <strong>📨 Confira sua caixa de e-mail</strong>
+    <p>O envio é automático e leva até 5 minutos. Se não aparecer, dá uma olhada no <strong>spam/lixo eletrônico</strong>.</p>
+  </div>
+
+  <div class="steps">
+    <h3>Próximos passos</h3>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>Abre o e-mail de <strong>VidaFinanceira</strong> e baixa o arquivo <strong>Financeiro.xlsx</strong></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>Abre no Excel <strong>OU</strong> faz upload no Google Sheets (drive.google.com)</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>Vai na aba <strong>"📖 Como Usar"</strong> — tem 5 passos pra começar hoje</div>
+    </div>
+  </div>
+
+  <p class="help">
+    Não recebeu em 5 minutos? Manda um e-mail pra <a href="mailto:alex.anascimento99@gmail.com">alex.anascimento99@gmail.com</a> com o número do seu pagamento.
+  </p>
+
+  <div class="badge">Pagamento aprovado pelo Mercado Pago</div>
+</div>
+</body>
+</html>
