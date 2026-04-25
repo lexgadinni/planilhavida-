@@ -8,6 +8,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,500&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+  ttq.load('D7MKGRJC77UBPTE8D1S0');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
 <style>
 :root{
   --navy:#0F1B3C;
@@ -992,7 +1002,7 @@ footer .logo{color:#fff;margin-bottom:14px}
     <div style="font-size:48px;margin-bottom:10px">🎉</div>
     <h3>Você está a 1 click da virada</h3>
     <p>Vamos te redirecionar para o pagamento seguro do Mercado Pago. Após a confirmação, sua planilha chega em até 5 minutos no seu e-mail.</p>
-    <a href="/api/checkout" target="_top" rel="noopener" class="btn-primary" id="confirmBuy" style="margin-bottom:12px;text-decoration:none;justify-content:center;display:inline-flex">
+    <a href="/api/checkout" target="_top" rel="noopener" class="btn-primary" id="confirmBuy" onclick="if(typeof ttq!=='undefined')ttq.track('ClickButton',{button_text:'IR PARA O PAGAMENTO',value:27,currency:'BRL'});" style="margin-bottom:12px;text-decoration:none;justify-content:center;display:inline-flex">
       IR PARA O PAGAMENTO
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
@@ -1003,6 +1013,14 @@ footer .logo{color:#fff;margin-bottom:14px}
 <script>
 // === FUNÇÕES DO MODAL ===
 function comprarAgora(){
+  // TikTok Pixel - rastreia início do checkout
+  if (typeof ttq !== 'undefined') {
+    ttq.track('InitiateCheckout', {
+      contents: [{ content_id: 'planilha-financeira', content_name: 'Planilha Financeira Pessoal', quantity: 1, price: 27.00 }],
+      value: 27.00,
+      currency: 'BRL'
+    });
+  }
   document.getElementById('modal').classList.add('active');
   document.body.style.overflow='hidden';
 }
