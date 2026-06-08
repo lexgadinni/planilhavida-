@@ -51,10 +51,12 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from:        FROM_EMAIL,
-        to:          [email],
-        subject:     '✅ Sua Planilha Financeira chegou!',
-        html:        buildEmail(firstName),
+        from:     FROM_EMAIL,
+        reply_to: 'alex.anascimento99@gmail.com',
+        to:       [email],
+        subject:  'Sua Planilha Financeira chegou! - VidaFinanceira',
+        headers:  { 'X-Priority': '1' },
+        html:     buildEmail(firstName),
         attachments: [{ filename: 'PlanilhaFinanceira-VidaFinanceira.xlsx', content: fileBase64 }],
       }),
     });
