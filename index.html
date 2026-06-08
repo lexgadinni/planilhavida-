@@ -122,7 +122,13 @@ nav.scrolled{box-shadow:0 4px 20px rgba(15,27,60,.08)}
   background:linear-gradient(135deg,#F9F4EC 0%,#FFF0DC 60%,#FFE5CC 100%);
   padding:72px 0 100px;
   position:relative;
+}
+.hero-blobs{
+  position:absolute;
+  inset:0;
   overflow:hidden;
+  pointer-events:none;
+  z-index:0;
 }
 .hero-blob{
   position:absolute;
@@ -290,9 +296,10 @@ h1.hero-title .strike{color:var(--red);text-decoration:line-through;font-weight:
   align-items:center;
   gap:10px;
   border:1px solid rgba(15,27,60,.04);
+  z-index:10;
 }
-.floating-tag.t1{top:-24px;right:-24px;animation:float 3s ease-in-out infinite;color:var(--green-d)}
-.floating-tag.t2{bottom:16px;left:0;animation:float 3.5s ease-in-out infinite reverse;color:var(--orange)}
+.floating-tag.t1{top:-20px;right:0;animation:float 3s ease-in-out infinite;color:var(--green-d)}
+.floating-tag.t2{bottom:-20px;left:20px;animation:float 3.5s ease-in-out infinite reverse;color:var(--orange)}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
 /* === STATS BAR === */
@@ -1095,9 +1102,11 @@ footer{
 
 <!-- HERO -->
 <section class="hero" style="padding:72px 0 100px">
-  <div class="hero-blob b1"></div>
-  <div class="hero-blob b2"></div>
-  <div class="container">
+  <div class="hero-blobs">
+    <div class="hero-blob b1"></div>
+    <div class="hero-blob b2"></div>
+  </div>
+  <div class="container" style="position:relative;z-index:1">
     <div class="hero-grid">
       <div>
         <div class="hero-tag reveal"><span class="dot"></span>+<span class="counter" data-target="5000">0</span> PESSOAS JÁ TRANSFORMARAM SUAS FINANÇAS</div>
